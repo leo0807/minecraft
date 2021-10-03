@@ -30,11 +30,11 @@ export default function Player(props) {
     }, [api.velocity])
     // camera的位置为player的位置
     useFrame(() => {
-        if (Math.abs(ref.current.position.x) >= 50) camera.position.x = 50;
-        if (Math.abs(ref.current.position.y) >= 50) camera.position.y = 50;
+        if (Math.abs(ref.current.position.x) >= 50) ref.current.position.x = 49;
+        if (Math.abs(ref.current.position.z) >= 50) ref.current.position.z = 49;
         camera.position.copy(ref.current.position);
 
-        console.log(camera.position);
+        // console.log(camera.position);
         const direction = new Vector3();
         const frontVector = new Vector3(
             0,
