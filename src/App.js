@@ -10,7 +10,6 @@ import { useInterval } from './hooks/useInterval';
 import { nanoid } from 'nanoid';
 import BGM from './components/BGM';
 import calm1 from './music/bgm/calm1.mp3';
-import calm2 from './music/bgm/calm2.mp3';
 
 
 function App() {
