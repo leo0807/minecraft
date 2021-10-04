@@ -14,7 +14,7 @@ import calm2 from './music/bgm/calm2.mp3';
 
 
 function App() {
-  const playerList = [calm1, calm2];
+  // const playList = [calm1, calm2];
   const [cubes, saveWorld, clearCubes] = useStore(state => [
     state.cubes,
     state.saveWorld,
@@ -29,7 +29,7 @@ function App() {
       <button
         onClick={e => clearCubes(cubes)}
       >Clear Cubes</button>
-      <BGM src={playerList} controls={true} loop={true} preload='auto' />
+      <BGM src={calm1} controls={false} loop={true} preload='auto' autoplay={false} />
       <Canvas shadowMap sRGB>
         <Sky sunPosition={[100, 20, 100]} />
         <ambientLight position={[100, 100, 100]} />
