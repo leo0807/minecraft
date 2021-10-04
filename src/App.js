@@ -8,29 +8,43 @@ import Cube from './components/Cube';
 import { useStore } from './hooks/useStore';
 import { useInterval } from './hooks/useInterval';
 import { nanoid } from 'nanoid';
+import BGM from './components/BGM';
+import calm1 from './music/bgm/calm1.mp3';
+import calm2 from './music/bgm/calm2.mp3';
+
+
 function App() {
-  const [cubes, saveWorld] = useStore(state => [
+  const playerList = [calm1, calm2];
+  const [cubes, saveWorld, clearCubes] = useStore(state => [
     state.cubes,
-    state.saveWorld
+    state.saveWorld,
+    state.clearCubes
   ]);
   useInterval(() => {
     saveWorld(cubes);
     console.log('Saved');
   }, 10 * 1000);
-  return (<Canvas shadowMap sRGB>
-    <Sky sunPosition={[100, 20, 100]} />
-    <ambientLight position={[100, 100, 100]} />
-    <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
-    <Physics gravity={[0, -30, 0]}>
-      <Ground position={[0, 0.5, 0]} />
-      <Player position={[0, 3, 10]} />
-      {
-        cubes.map(cube => (
-          <Cube key={nanoid()} position={cube.pos} texture={cube.texture || 'dirt'} />
-        ))
-      }
-    </Physics>
-  </Canvas>);
+  return (
+    <>
+      <button
+        onClick={e => clearCubes(cubes)}
+      >Clear Cubes</button>
+      <BGM src={playerList} controls={true} loop={true} preload='auto' />
+      <Canvas shadowMap sRGB>
+        <Sky sunPosition={[100, 20, 100]} />
+        <ambientLight position={[100, 100, 100]} />
+        <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
+        <Physics gravity={[0, -30, 0]}>
+          <Ground position={[0, 0.5, 0]} />
+          <Player position={[0, 3, 10]} />
+          {
+            cubes.map(cube => (
+              <Cube key={nanoid()} position={cube.pos} texture={cube.texture || 'dirt'} />
+            ))
+          }
+        </Physics>
+      </Canvas>
+    </>);
 }
 
 export default App;
